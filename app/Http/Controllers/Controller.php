@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -43,11 +42,12 @@ class Controller extends BaseController
         }
 
         $user->save();
-        Auth::login($user);
+        $token = $user->createToken("auth_token")->plainTextToken;
         return response()->json([
             "status" => 1,
             'message' => 'Successfully created user!',
-            "value" => $user
+            "value" => $user,
+            "access_token" => $token
         ]);
     }
     public function login(Request $request)
@@ -85,7 +85,7 @@ class Controller extends BaseController
     }
     public function update(Request $request, $id)
     {
-        $user_id = auth()->user()->id;
+        $user_id = $id;
         if (user::where(["id" => $user_id])->exists()) {
             $update = user::find($user_id);
             $update->password = Hash::make($request->password);
