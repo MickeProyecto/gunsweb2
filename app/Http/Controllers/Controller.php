@@ -16,7 +16,7 @@ class Controller extends BaseController
     public function signup(Request $request)
     {
         $request->validate([
-            'photo' => 'required| unique:users',
+            'photo' => 'required| img',
             'name' => 'required',
             'lastname' => 'required',
             'password' => 'required',

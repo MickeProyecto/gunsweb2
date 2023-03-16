@@ -14,7 +14,7 @@ class MaterialController extends Controller
     public function createm(Request $request)
     {
         $request->validate([
-            'foto'=>'required',
+            'foto'=>'required | image',
             'nombre'=>'required | unique:materials',
             'marca'=>'required',
             'descripcion'=>'required',
@@ -24,14 +24,14 @@ class MaterialController extends Controller
         ]);
 
         $material = new material();
-        if($request->hasFile('img')){
+        /*if($request->hasFile('img')){
             $file= $request->file('img');
             $destinationpath='img/';
             $filname = time().'-'.$file->getClientOriginalName();
             $uploadsuccess= $request->file('img')->move($destinationpath,$filname);
             $material->img = $destinationpath.$filname;
-        }
-        //$material->img=$request->img;
+        }*/
+        $material->img=$request->img;
         $material->nombre=$request->nombre;
         $material->marca=$request->marca;
         $material->descripcion=$request->descripcion;
