@@ -16,7 +16,7 @@ class Controller extends BaseController
     public function signup(Request $request)
     {
         $request->validate([
-            'photo' => 'required| img',
+            'photo' => 'required',
             'name' => 'required',
             'lastname' => 'required',
             'password' => 'required',
@@ -43,7 +43,6 @@ class Controller extends BaseController
         }
 
         $user->save();
-        Auth::login($user);
         return response()->json([
             "status" => 1,
             'message' => 'Successfully created user!',
@@ -61,8 +60,8 @@ class Controller extends BaseController
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken("auth_token")->plainTextToken;
                 return response()->json([
-                    $user,
-                    $token
+                    "value" => $user,
+                    "access_token" => $token
                 ]);
             } else {
                 return response()->json(
@@ -101,12 +100,12 @@ class Controller extends BaseController
             ]);
         }
     }
-    // public function logout()
-    // {
-    //     auth()->user()->tokens()->delete();
-    //     return response()->json([
-    //         "status" => 1,
-    //         "message" => "cierre de session",
-    //     ]);
-    // }
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+        return response()->json([
+            "status" => 1,
+            "message" => "cierre de session",
+        ]);
+    }
 }
