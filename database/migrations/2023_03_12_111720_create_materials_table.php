@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
-            $table->binary('img');
+            $table->longText('img');
             $table->string('nombre');
             $table->string('marca');
             $table->string('descripcion');

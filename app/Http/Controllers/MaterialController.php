@@ -7,19 +7,20 @@ use Illuminate\Http\Request;
 
 class MaterialController extends Controller
 {
-    public function indexm(){
-        $material=material::all();
-        return $material;
+    public function indexm()
+    {
+        $material = material::all();
+        return response()->json($material);
     }
     public function createm(Request $request)
     {
         $request->validate([
-            'foto'=>'required | image',
-            'nombre'=>'required | unique:materials',
-            'marca'=>'required',
-            'descripcion'=>'required',
-            'cantidad'=>'required',
-            'precio'=>'required',
+            'img' => 'required',
+            'nombre' => 'required | unique:materials',
+            'marca' => 'required',
+            'descripcion' => 'required',
+            'cantidad' => 'required',
+            'precio' => 'required',
             'id_categoria',
         ]);
 
@@ -31,13 +32,13 @@ class MaterialController extends Controller
             $uploadsuccess= $request->file('img')->move($destinationpath,$filname);
             $material->img = $destinationpath.$filname;
         }*/
-        $material->img=$request->img;
-        $material->nombre=$request->nombre;
-        $material->marca=$request->marca;
-        $material->descripcion=$request->descripcion;
-        $material->cantidad=$request->cantidad;
-        $material->precio=$request->precio;
-        $material->id_categoria=$request->id_categoria;
+        $material->img = $request->img;
+        $material->nombre = $request->nombre;
+        $material->marca = $request->marca;
+        $material->descripcion = $request->descripcion;
+        $material->cantidad = $request->cantidad;
+        $material->precio = $request->precio;
+        $material->id_categoria = $request->id_categoria;
         $material->save();
         return response()->json([
             'message' => 'Successfully created material!'
@@ -45,25 +46,24 @@ class MaterialController extends Controller
     }
     public function readm(Request $request)
     {
-
     }
     public function updatem(Request $request)
     {
-        $material=material::findOrFail($request->id);
-        if($request->hasFile('img')){
-            $file= $request->file('img');
-            $destinationpath='img/';
-            $filname = time().'-'.$file->getClientOriginalName();
-            $uploadsuccess= $request->file('img')->move($destinationpath,$filname);
-            $material->img = $destinationpath.$filname;
+        $material = material::findOrFail($request->id);
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $destinationpath = 'img/';
+            $filname = time() . '-' . $file->getClientOriginalName();
+            $uploadsuccess = $request->file('img')->move($destinationpath, $filname);
+            $material->img = $destinationpath . $filname;
         }
         //$material->img=$request->img;
-        $material->nombre=$request->nombre;
-        $material->marca=$request->marca;
-        $material->descripcion=$request->descripcion;
-        $material->cantidad=$request->cantidad;
-        $material->precio=$request->precio;
-        $material->id_categoria=$request->id_categoria;
+        $material->nombre = $request->nombre;
+        $material->marca = $request->marca;
+        $material->descripcion = $request->descripcion;
+        $material->cantidad = $request->cantidad;
+        $material->precio = $request->precio;
+        $material->id_categoria = $request->id_categoria;
         $material->save();
         return $material;
     }
