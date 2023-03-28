@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\CategoriaController;
-
+use App\Http\Controllers\PedidosController;
 
 
 /*
@@ -37,34 +37,33 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::post("createc", [CategoriaController::class, "createc"]);
     Route::post("createm", [MaterialController::class, "createm"]);
 
-    Route::group(['middleware' => ["auth", "admin"]], function () {
-        Route::get("indexu", [UserController::class, "indexu"]);
-        Route::post("createu", [UserController::class, "createu"]);
-        //Route::get("readu",[UserController::class,"readu"]);
-        Route::put("updateu/{id}", [UserController::class, "updateu"]);
-        Route::delete("deleteu/{id}", [UserController::class, "deleteu"]);
+    // Route::group(['middleware' => ["auth", "admin"]], function () {
+    // Route::get("indexu", [UserController::class, "indexu"]);
+    // Route::post("createu", [UserController::class, "createu"]);
+    //Route::get("readu",[UserController::class,"readu"]);
+    // Route::delete("deleteu/{id}", [Controller::class, "deleteu"]);
 
-        Route::get("indexpu", [PuntoentregaController::class, "indexpu"]);
-        Route::post("createpu", [PuntoentregaController::class, "createpu"]);
-        //Route::get("readpu",[PuntoentregaController::class,"readpu"]);
-        Route::put("updatepu/{id}", [PuntoentregaController::class, "updatepu"]);
-        Route::delete("deletepu/{id}", [PuntoentregaController::class, "deletepu"]);
+    Route::get("indexpu", [PuntoentregaController::class, "indexpu"]);
+    Route::post("createpu", [PuntoentregaController::class, "createpu"]);
+    //Route::get("readpu",[PuntoentregaController::class,"readpu"]);
+    Route::put("updatepu/{id}", [PuntoentregaController::class, "updatepu"]);
+    Route::delete("deletepu/{id}", [PuntoentregaController::class, "deletepu"]);
 
-        Route::get("indexpe", [PedidosController::class, "indexpe"]);
-        Route::post("createpe", [PedidosController::class, "createpe"]);
-        //Route::get("readpe",[PedidosController::class,"readpe"]);
-        Route::put("updatepe/{id}", [PedidosController::class, "updatepe"]);
-        Route::delete("deletepe/{id}", [PedidosController::class, "deletepe"]);
+    Route::get("indexpe", [PedidosController::class, "indexpe"]);
+    Route::post("createpe", [PedidosController::class, "createpe"]);
+    //Route::get("readpe",[PedidosController::class,"readpe"]);
+    Route::put("updatepe/{id}", [PedidosController::class, "updatepe"]);
+    Route::delete("deletepe/{id}", [PedidosController::class, "deletepe"]);
 
-        //Route::get("readm",[MaterialController::class,"readm"]);
-        Route::put("updatem/{id}", [MaterialController::class, "updatem"]);
-        Route::delete("deletem/{id}", [MaterialController::class, "deletem"]);
+    //Route::get("readm",[MaterialController::class,"readm"]);
+    Route::put("updatem/{id}", [MaterialController::class, "updatem"]);
+    Route::delete("deletem/{id}", [MaterialController::class, "deletem"]);
 
-        Route::get("indexc", [CategoriaController::class, "indexc"]);
-        //Route::get("readc",[CategoriaController::class,"readc"]);
-        Route::put("updatec/{id}", [CategoriaController::class, "updatec"]);
-        Route::delete("deletec/{id}", [CategoriaController::class, "deletec"]);
-    });
+    Route::get("indexc", [CategoriaController::class, "indexc"]);
+    //Route::get("readc",[CategoriaController::class,"readc"]);
+    Route::put("updatec/{id}", [CategoriaController::class, "updatec"]);
+    Route::delete("deletec/{id}", [CategoriaController::class, "deletec"]);
+    // });
 });
 
 Route::get('indexca', [CarritoController::class, "indexca"]);
