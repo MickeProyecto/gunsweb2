@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\PedidosController;
+
 
 
 /*
@@ -66,7 +67,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     // });
 });
 
-Route::get('indexca', [CarritoController::class, "indexca"]);
+Route::post('indexca', [CarritoController::class, "indexca"]);
 Route::post('createca', [CarritoController::class, "createca"]);
 //Route::get('readca',[CarritoController::class,"readca"]);
 Route::put('updateca/{id}', [CarritoController::class, "updateca"]);

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('carritos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_material')->references('id')->on('materials');
-            //$table->foreignId('id_user')->references('id')->on('users');
+            $table->foreignId('id_user')->references('id')->on('users');
             $table->string('cantidad');
         });
     }
