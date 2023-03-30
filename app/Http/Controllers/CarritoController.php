@@ -15,6 +15,7 @@ class CarritoController extends Controller
     {
         $carrito = new carrito();
         $carrito->id_material=$request->id_material;
+        $carrito->id_user=$request->id_user;
         $carrito->cantidad=$request->cantidad;
         $carrito->save();
         return response()->json([

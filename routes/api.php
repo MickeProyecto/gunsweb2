@@ -67,7 +67,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     // });
 });
 
-Route::post('indexca', [CarritoController::class, "indexca"]);
+Route::get('indexca', [CarritoController::class, "indexca"]);
 Route::post('createca', [CarritoController::class, "createca"]);
 //Route::get('readca',[CarritoController::class,"readca"]);
 Route::put('updateca/{id}', [CarritoController::class, "updateca"]);
