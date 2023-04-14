@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class puntoentrega extends Model
 {
     use HasFactory;
-    public $timestaps = false;
+    public $timestamps = false;
     protected $fillable = [
         'id',
         'tienda',

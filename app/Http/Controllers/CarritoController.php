@@ -14,7 +14,7 @@ class CarritoController extends Controller
     public function createca(Request $request)
     {
         $carrito = new carrito();
-        $carrito->id_usuario=$request->id_usuario;
+        $carrito->id_user=$request->id_user;
         $carrito->id_material=$request->id_material;
         $carrito->precio=$request->precio;
         $carrito->cantidad=$request->cantidad;

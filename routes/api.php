@@ -7,6 +7,7 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\PuntoentregaController;
 
 
 
