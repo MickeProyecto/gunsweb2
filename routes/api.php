@@ -73,3 +73,4 @@ Route::post('createca', [CarritoController::class, "createca"]);
 //Route::get('readca',[CarritoController::class,"readca"]);
 Route::put('updateca/{id}', [CarritoController::class, "updateca"]);
 Route::delete('deleteca/{id}', [CarritoController::class, "deleteca"]);
+Route::get('indexo/{id}',[PedidosController::class,"indexo"]);
