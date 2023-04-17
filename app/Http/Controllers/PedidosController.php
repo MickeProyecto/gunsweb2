@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\pedidos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PedidosController extends Controller
 {
@@ -18,6 +19,7 @@ class PedidosController extends Controller
                 where id_usuario = '$id';";
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
+    }
     public function createpe(Request $request)
     {
         $request->validate([
