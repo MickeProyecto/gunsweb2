@@ -13,6 +13,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    public function indexusuarios()
+    {
+        $usuarios = User::all();
+        return response()->json($usuarios);
+    }
+
     public function signup(Request $request)
     {
         $request->validate([

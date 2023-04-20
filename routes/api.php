@@ -33,6 +33,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get("userprofile", [Controller::class, "userprofile"]);
     Route::get("logout", [Controller::class, "logout"]);
     Route::put("update/{id}", [Controller::class, "update"]);
+    Route::get("indexusuarios", [Controller::class, "indexusuarios"]);
+
     Route::get("indexm", [MaterialController::class, "indexm"]);
     Route::middleware('cliente')->prefix('cliente')->group(function () {
     });
@@ -62,15 +64,16 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::delete("deletem/{id}", [MaterialController::class, "deletem"]);
 
     Route::get("indexc", [CategoriaController::class, "indexc"]);
-    //Route::get("readc",[CategoriaController::class,"readc"]);
+    //Route::get("readc",[CategoriaController::class,"readc"])
     Route::put("updatec/{id}", [CategoriaController::class, "updatec"]);
     Route::delete("deletec/{id}", [CategoriaController::class, "deletec"]);
-    // });
-});
+    Route::get('indexo/{id}', [PedidosController::class, "indexo"]);
+    Route::get('index', [PedidosController::class, "index"]);
 
-Route::get('indexca', [CarritoController::class, "indexca"]);
-Route::post('createca', [CarritoController::class, "createca"]);
-//Route::get('readca',[CarritoController::class,"readca"]);
-Route::put('updateca/{id}', [CarritoController::class, "updateca"]);
-Route::delete('deleteca/{id}', [CarritoController::class, "deleteca"]);
-Route::get('indexo/{id}',[PedidosController::class,"indexo"]);
+
+    Route::get('indexca', [CarritoController::class, "indexca"]);
+    Route::post('createca', [CarritoController::class, "createca"]);
+    //Route::get('readca',[CarritoController::class,"readca"]);
+    Route::put('updateca/{id}', [CarritoController::class, "updateca"]);
+    Route::delete('deleteca/{id}', [CarritoController::class, "deleteca"]);
+});

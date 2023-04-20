@@ -14,7 +14,7 @@ class PedidosController extends Controller
         return $pedidos;
     }
     public function indexo($id){
-        $sql = "Select metodo_pago, id_punto_entrega, id_material, id_usuario, total, estado
+        $sql = "Select metodo_pago, id_punto_entrega, id_material, id_usuario, Total, estado
                 from pedidos
                 where id_usuario = '$id';";
         $CreateRanking = DB::select($sql);
