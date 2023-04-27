@@ -89,6 +89,30 @@ class Controller extends BaseController
             "data" => auth()->user()
         ]);
     }
+        Public function updateuser(Request $request){//Permite actualizar los datos del cliente requeridos
+        $user_id = auth()->user()->id;
+        if (user::where(["id" => $user_id])->exists()) {
+            $updateuser = user::find($user_id);
+            $updateuser->photo = $request->photo;
+            $updateuser->name = $request->name;
+            $updateuser->lastname = $request->lastname;
+            $updateuser->password = Hash::make($request->password);
+            $updateuser->email = $request->email;
+            $updateuser->phone = $request->phone;
+            $updateuser->dni = $request->dni;
+            $updateuser->save();
+            return response()->json([
+                "status" => 1,
+                "message" => "Actualizado correctamente",
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "message" => "No se pùdo actucalizar",
+            ]);
+        }
+
+    }
     public function update(Request $request, $id)
     {
         $user_id = auth()->user()->id;
