@@ -34,9 +34,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get("logout", [Controller::class, "logout"]);
     Route::put("update/{id}", [Controller::class, "update"]);
     Route::get("indexusuarios", [Controller::class, "indexusuarios"]);
-    Route::put("updateuser/{id}", [Controller::class, "updateuser"]);
+    Route::get("indexespecifico/{id}", [Controller::class, "indexespecifico"]);
 
-    
     Route::get("indexm", [MaterialController::class, "indexm"]);
     Route::middleware('cliente')->prefix('cliente')->group(function () {
     });

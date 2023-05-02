@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
@@ -16,8 +17,17 @@ class Controller extends BaseController
 
     public function indexusuarios()
     {
-        $usuarios = User::all();
+        $usuarios = User::orderBy('lastname', 'ASC')->get();
         return response()->json($usuarios);
+    }
+
+    public function indexespecifico($id)
+    {
+        $sql = "select id, photo, name, lastname, email, password, phone, dni
+        from users
+        where id = $id;";
+        $usuarios = DB::select($sql);
+        return $usuarios;
     }
 
     public function signup(Request $request)
@@ -88,30 +98,6 @@ class Controller extends BaseController
             "message" => "Acerca del perfil del usuario",
             "data" => auth()->user()
         ]);
-    }
-        Public function updateuser(Request $request){//Permite actualizar los datos del cliente requeridos
-        $user_id = auth()->user()->id;
-        if (user::where(["id" => $user_id])->exists()) {
-            $updateuser = user::find($user_id);
-            $updateuser->photo = $request->photo;
-            $updateuser->name = $request->name;
-            $updateuser->lastname = $request->lastname;
-            $updateuser->password = Hash::make($request->password);
-            $updateuser->email = $request->email;
-            $updateuser->phone = $request->phone;
-            $updateuser->dni = $request->dni;
-            $updateuser->save();
-            return response()->json([
-                "status" => 1,
-                "message" => "Actualizado correctamente",
-            ]);
-        } else {
-            return response()->json([
-                "status" => 1,
-                "message" => "No se pùdo actucalizar",
-            ]);
-        }
-
     }
     public function update(Request $request, $id)
     {
