@@ -99,10 +99,63 @@ class Controller extends BaseController
             "data" => auth()->user()
         ]);
     }
-    public function update(Request $request, $id)
-    {
+        Public function updatephoto(Request $request){//Permite actualizar solo la foto del usuario
         $user_id = auth()->user()->id;
         if (user::where(["id" => $user_id])->exists()) {
+            $updateuser = user::find($user_id);
+            $updateuser->photo = $request->photo;
+            $updateuser->save();
+            return response()->json([
+                "status" => 1,
+                "message" => "Actualizado correctamente",
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "message" => "No se pùdo actucalizar",
+            ]);
+        }
+
+    }
+    Public function updatephone(Request $request){//Permite actualizar solo el numero de telefone
+        $user_id = auth()->user()->id;
+        if (user::where(["id" => $user_id])->exists()) {
+            $updateuser = user::find($user_id);
+            $updateuser->phone = $request->phone;
+            $updateuser->save();
+            return response()->json([
+                "status" => 1,
+                "message" => "Actualizado correctamente",
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "message" => "No se pùdo actucalizar",
+            ]);
+        }
+
+    }
+    Public function updateemail(Request $request){//Permite actualizar solo el email
+        $user_id = auth()->user()->id;
+        if (user::where(["id" => $user_id])->exists()) {
+            $updateuser = user::find($user_id);
+            $updateuser->email = $request->email;
+            $updateuser->save();
+            return response()->json([
+                "status" => 1,
+                "message" => "Actualizado correctamente",
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "message" => "No se pùdo actucalizar",
+            ]);
+        }
+
+    }
+    public function updatepassword(Request $request, $id){//Actualizar solo contraseñas
+        $user_id = auth()->user()->id;
+        if (user::where(["id" => $user_id] )->exists()) {
             $update = user::find($user_id);
             $update->password = Hash::make($request->password);
             $update->save();
