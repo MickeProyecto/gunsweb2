@@ -34,7 +34,10 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get("logout", [Controller::class, "logout"]);
     Route::put("update/{id}", [Controller::class, "update"]);
     Route::get("indexusuarios", [Controller::class, "indexusuarios"]);
-    Route::get("indexespecifico/{id}", [Controller::class, "indexespecifico"]);
+    Route::put("updatephoto/{id}", [Controller::class, "updatephoto"]);
+    Route::put("updatephone/{id}", [Controller::class, "updatephone"]);
+    Route::put("updateemail/{id}", [Controller::class, "updateemail"]);
+    Route::put("updatepassword/{id}", [Controller::class, "updatepassword"]);
 
     Route::get("indexm", [MaterialController::class, "indexm"]);
     Route::middleware('cliente')->prefix('cliente')->group(function () {
