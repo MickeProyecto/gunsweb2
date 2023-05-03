@@ -64,6 +64,22 @@ class CategoriaController extends Controller
         }
     }
     public function updatetipo(Request $request, $id){
+            $user_id = $id;
+        if (categoria::where(["id" => $user_id])->exists()) {
+            $updateuser = categoria::find($user_id);
+            $updateuser->tipo = $request->tipo;
+            $updateuser->save();
+            return response()->json([
+                "status" => 1,
+                "message" => "Actualizado correctamente",
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "message" => "No se pùdo actucalizar",
+            ]);
+        }
+    }
     public function deletec(Request $request)
     {
         categoria::destroy($request->id);
