@@ -29,19 +29,41 @@ class CategoriaController extends Controller
         ]);
 
     }
-    public function readc(Request $request)
-    {
-
+        public function updatenombre(Request $request, $id){
+        $user_id = $id;
+        if (categoria::where(["id" => $user_id])->exists()) {
+            $categoria = categoria::find($user_id);
+            $categoria->nombre = $request->nombre;
+            $categoria->save();
+            return response()->json([
+                "status" => 1,
+                "message" => "Actualizado correctamente",
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "message" => "No se pùdo actucalizar",
+            ]);
+        }
     }
-    public function updatec(Request $request)
-    {
-        $categoria=categoria::findOrFail($request->id);
-        $categoria->nombre=$request->nombre;
-        $categoria->descripcion=$request->descripcion;
-        $categoria->tipo=$request->tipo;
-        $categoria->save();
-        return $categoria;
+    public function updatedescripcion(Request $request, $id){
+        $user_id = $id;
+        if (categoria::where(["id" => $user_id])->exists()) {
+            $updateuser = categoria::find($user_id);
+            $updateuser->descripcion = $request->descripcion;
+            $updateuser->save();
+            return response()->json([
+                "status" => 1,
+                "message" => "Actualizado correctamente",
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "message" => "No se pùdo actucalizar",
+            ]);
+        }
     }
+    public function updatetipo(Request $request, $id){
     public function deletec(Request $request)
     {
         categoria::destroy($request->id);
