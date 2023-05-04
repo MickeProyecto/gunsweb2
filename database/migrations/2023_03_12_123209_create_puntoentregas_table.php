@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('mapa');
             $table->string('streeview');
             $table->string('encargado');
-            $table->binary('foto');
+            $table->longText('foto');
         });
     }
 
