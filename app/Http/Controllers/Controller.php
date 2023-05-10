@@ -23,7 +23,7 @@ class Controller extends BaseController
 
     public function indexespecifico($id)
     {
-        $sql = "select id, photo, name, lastname, email, password, phone, dni
+        $sql = "select id, photo, name, lastname, email, password, phone, dni, rol
         from users
         where id = $id;";
         $usuarios = DB::select($sql);
@@ -99,8 +99,10 @@ class Controller extends BaseController
             "data" => auth()->user()
         ]);
     }
-        Public function updatephoto(Request $request){//Permite actualizar solo la foto del usuario
-        $user_id = auth()->user()->id;
+
+    public function updatephoto(Request $request, $id)
+    { //Permite actualizar solo la foto del usuario
+        $user_id = $id;
         if (user::where(["id" => $user_id])->exists()) {
             $updateuser = user::find($user_id);
             $updateuser->photo = $request->photo;
@@ -115,10 +117,11 @@ class Controller extends BaseController
                 "message" => "No se pùdo actucalizar",
             ]);
         }
-
     }
-    Public function updatephone(Request $request){//Permite actualizar solo el numero de telefone
-        $user_id = auth()->user()->id;
+
+    public function updatephone(Request $request, $id)
+    { //Permite actualizar solo el numero de telefone
+        $user_id = $id;
         if (user::where(["id" => $user_id])->exists()) {
             $updateuser = user::find($user_id);
             $updateuser->phone = $request->phone;
@@ -133,10 +136,11 @@ class Controller extends BaseController
                 "message" => "No se pùdo actucalizar",
             ]);
         }
-
     }
-    Public function updateemail(Request $request){//Permite actualizar solo el email
-        $user_id = auth()->user()->id;
+
+    public function updateemail(Request $request, $id)
+    { //Permite actualizar solo el email
+        $user_id = $id;
         if (user::where(["id" => $user_id])->exists()) {
             $updateuser = user::find($user_id);
             $updateuser->email = $request->email;
@@ -151,11 +155,12 @@ class Controller extends BaseController
                 "message" => "No se pùdo actucalizar",
             ]);
         }
-
     }
-    public function updatepassword(Request $request, $id){//Actualizar solo contraseñas
-        $user_id = auth()->user()->id;
-        if (user::where(["id" => $user_id] )->exists()) {
+
+    public function updatepassword(Request $request, $id)
+    { //Actualizar solo contraseñas
+        $user_id = $id;
+        if (user::where(["id" => $user_id])->exists()) {
             $update = user::find($user_id);
             $update->password = Hash::make($request->password);
             $update->save();
@@ -170,6 +175,7 @@ class Controller extends BaseController
             ]);
         }
     }
+
     public function logout()
     {
         auth()->user()->tokens()->delete();

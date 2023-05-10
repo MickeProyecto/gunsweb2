@@ -32,8 +32,8 @@ Route::post("login", [Controller::class, "login"]);
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get("userprofile", [Controller::class, "userprofile"]);
     Route::get("logout", [Controller::class, "logout"]);
-    Route::put("update/{id}", [Controller::class, "update"]);
     Route::get("indexusuarios", [Controller::class, "indexusuarios"]);
+    Route::get("indexespecifico/{id}", [Controller::class, "indexespecifico"]);
     Route::put("updatephoto/{id}", [Controller::class, "updatephoto"]);
     Route::put("updatephone/{id}", [Controller::class, "updatephone"]);
     Route::put("updateemail/{id}", [Controller::class, "updateemail"]);
@@ -42,6 +42,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get("indexm", [MaterialController::class, "indexm"]);
     Route::middleware('cliente')->prefix('cliente')->group(function () {
     });
+    Route::get("indexmex/{id}", [MaterialController::class, "indexmex"]);
     Route::post("createc", [CategoriaController::class, "createc"]);
     Route::post("createm", [MaterialController::class, "createm"]);
 
@@ -52,9 +53,17 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     // Route::delete("deleteu/{id}", [Controller::class, "deleteu"]);
 
     Route::get("indexpu", [PuntoentregaController::class, "indexpu"]);
+    Route::get("indexpuex/{id}", [PuntoentregaController::class, "indexpuex"]);
     Route::post("createpu", [PuntoentregaController::class, "createpu"]);
     //Route::get("readpu",[PuntoentregaController::class,"readpu"]);
-    Route::put("updatepu/{id}", [PuntoentregaController::class, "updatepu"]);
+    Route::put("updatefoto/{id}", [PuntoentregaController::class, "updatefoto"]);
+    Route::put("updatetienda/{id}", [PuntoentregaController::class, "updatetienda"]);
+    Route::put("updateprovincia/{id}", [PuntoentregaController::class, "updateprovincia"]);
+    Route::put("updatecp/{id}", [PuntoentregaController::class, "updatecp"]);
+    Route::put("updatedireccion/{id}", [PuntoentregaController::class, "updatedireccion"]);
+    Route::put("updatemapa/{id}", [PuntoentregaController::class, "updatemapa"]);
+    Route::put("updatestreeview/{id}", [PuntoentregaController::class, "updatestreeview"]);
+    Route::put("updateencargado/{id}", [PuntoentregaController::class, "updateencargado"]);
     Route::delete("deletepu/{id}", [PuntoentregaController::class, "deletepu"]);
 
     Route::get("indexpe", [PedidosController::class, "indexpe"]);
@@ -65,13 +74,24 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
     //Route::get("readm",[MaterialController::class,"readm"]);
     Route::put("updatem/{id}", [MaterialController::class, "updatem"]);
+    Route::put("updatefotom/{id}", [MaterialController::class, "updatefoto"]);
+    Route::put("updatenombrem/{id}", [MaterialController::class, "updatenombre"]);
+    Route::put("updatemarcam/{id}", [MaterialController::class, "updatemarca"]);
+    Route::put("updatedescripcionm/{id}", [MaterialController::class, "updatedescripcion"]);
+    Route::put("updatecantidadm/{id}", [MaterialController::class, "updatecantidad"]);
+    Route::put("updatepreciom/{id}", [MaterialController::class, "updateprecio"]);
+    Route::put("updateidcategoriam/{id}", [MaterialController::class, "updateidcategoria"]);
+
     Route::delete("deletem/{id}", [MaterialController::class, "deletem"]);
 
     Route::get("indexc", [CategoriaController::class, "indexc"]);
+    Route::get("indexcex/{id}", [CategoriaController::class, "indexcex"]);
     //Route::get("readc",[CategoriaController::class,"readc"])
-    Route::put("updatenombre/{id}", [CategoriaController::class, "updatenombre"]);
-    Route::put("updatedescripcion/{id}", [CategoriaController::class, "updatedescripcion"]);
-    Route::put("updatetipo/{id}", [CategoriaController::class, "updatetipo"]);
+    Route::put("updatecnombre/{id}", [CategoriaController::class, "updatenombre"]);
+    Route::put("updatecdescripcion/{id}", [CategoriaController::class, "updatedescripcion"]);
+    Route::put("updatectipo/{id}", [CategoriaController::class, "updatetipo"]);
+
+    Route::put("updatec/{id}", [CategoriaController::class, "updatec"]);
     Route::delete("deletec/{id}", [CategoriaController::class, "deletec"]);
     Route::get('indexo/{id}', [PedidosController::class, "indexo"]);
     Route::get('index', [PedidosController::class, "index"]);

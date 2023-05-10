@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoriaController extends Controller
 {
@@ -11,6 +12,16 @@ class CategoriaController extends Controller
         $categoria=categoria::all();
         return $categoria;
     }
+
+    public function indexcex($id)
+    {
+        $sql = "select id, nombre, descripcion, tipo
+        from categorias
+        where id = $id;";
+        $categorias = DB::select($sql);
+        return $categorias;
+    }
+
     public function createc(Request $request)
     {
         $request->validate([
@@ -29,59 +40,78 @@ class CategoriaController extends Controller
         ]);
 
     }
-        public function updatenombre(Request $request, $id){
-        $user_id = $id;
-        if (categoria::where(["id" => $user_id])->exists()) {
-            $categoria = categoria::find($user_id);
-            $categoria->nombre = $request->nombre;
-            $categoria->save();
-            return response()->json([
-                "status" => 1,
-                "message" => "Actualizado correctamente",
-            ]);
-        } else {
-            return response()->json([
-                "status" => 1,
-                "message" => "No se pùdo actucalizar",
-            ]);
-        }
-    }
-    public function updatedescripcion(Request $request, $id){
-        $user_id = $id;
-        if (categoria::where(["id" => $user_id])->exists()) {
-            $updateuser = categoria::find($user_id);
-            $updateuser->descripcion = $request->descripcion;
-            $updateuser->save();
-            return response()->json([
-                "status" => 1,
-                "message" => "Actualizado correctamente",
-            ]);
-        } else {
-            return response()->json([
-                "status" => 1,
-                "message" => "No se pùdo actucalizar",
-            ]);
-        }
-    }
-    public function updatetipo(Request $request, $id){
-            $user_id = $id;
-        if (categoria::where(["id" => $user_id])->exists()) {
-            $updateuser = categoria::find($user_id);
-            $updateuser->tipo = $request->tipo;
-            $updateuser->save();
-            return response()->json([
-                "status" => 1,
-                "message" => "Actualizado correctamente",
-            ]);
-        } else {
-            return response()->json([
-                "status" => 1,
-                "message" => "No se pùdo actucalizar",
-            ]);
-        }
-    }
-    public function deletec(Request $request)
+    public function readc(Request $request)
     {
-        categoria::destroy($request->id);
+
+    }
+
+    public function updatenombre(Request $request, $id)
+    { //Permite actualizar solo el numero de telefone
+        $categoria_id = $id;
+        if (categoria::where(["id" => $categoria_id])->exists()) {
+            $updatecategoria = categoria::find($categoria_id);
+            $updatecategoria->nombre = $request->nombre;
+            $updatecategoria->save();
+            return response()->json([
+                "status" => 1,
+                "message" => "Actualizado correctamente",
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "message" => "No se pùdo actucalizar",
+            ]);
+        }
+    }
+
+    public function updatedescripcion(Request $request, $id)
+    { //Permite actualizar solo el numero de telefone
+        $categoria_id = $id;
+        if (categoria::where(["id" => $categoria_id])->exists()) {
+            $updatecategoria = categoria::find($categoria_id);
+            $updatecategoria->descripcion = $request->descripcion;
+            $updatecategoria->save();
+            return response()->json([
+                "status" => 1,
+                "message" => "Actualizado correctamente",
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "message" => "No se pùdo actucalizar",
+            ]);
+        }
+    }
+
+    public function updatetipo(Request $request, $id)
+    { //Permite actualizar solo el numero de telefone
+        $categoria_id = $id;
+        if (categoria::where(["id" => $categoria_id])->exists()) {
+            $updatecategoria = categoria::find($categoria_id);
+            $updatecategoria->tipo = $request->tipo;
+            $updatecategoria->save();
+            return response()->json([
+                "status" => 1,
+                "message" => "Actualizado correctamente",
+            ]);
+        } else {
+            return response()->json([
+                "status" => 1,
+                "message" => "No se pùdo actucalizar",
+            ]);
+        }
+    }
+    public function updatec(Request $request)
+    {
+        $categoria=categoria::findOrFail($request->id);
+        $categoria->nombre=$request->nombre;
+        $categoria->descripcion=$request->descripcion;
+        $categoria->tipo=$request->tipo;
+        $categoria->save();
+        return $categoria;
+    }
+    public function deletec($id)
+    {
+        categoria::destroy($id);
     }
 }
