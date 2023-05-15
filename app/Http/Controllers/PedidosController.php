@@ -61,4 +61,13 @@ class PedidosController extends Controller
     {
         pedidos::destroy($request->id);
     }
+    public function updatestock($id, $stock){
+        $sql = "UPDATE `materials`
+                SET `cantidad` = '$stock'
+                WHERE `materials`.`id` = $id;";
+        $consulta = DB::select($sql);
+        return Response()->json([
+            'message' => $consulta
+        ]);
+    }
 }
