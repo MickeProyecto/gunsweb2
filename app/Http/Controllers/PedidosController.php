@@ -13,7 +13,8 @@ class PedidosController extends Controller
         $pedidos = pedidos::all();
         return $pedidos;
     }
-    public function indexo($id){
+    public function indexo($id)
+    {
         $sql = "Select metodo_pago, id_punto_entrega, id_material, id_usuario, Total, estado
                 from pedidos
                 where id_usuario = '$id';";
@@ -57,14 +58,17 @@ class PedidosController extends Controller
         $pedidos->save();
         return $pedidos;
     }
+
     public function deletepe(Request $request)
     {
         pedidos::destroy($request->id);
     }
-    public function updatestock($id, $stock){
+
+    public function updatestock($id_material, Request $request)
+    {
         $sql = "UPDATE `materials`
-                SET `cantidad` = '$stock'
-                WHERE `materials`.`id` = $id;";
+                SET `cantidad` = '$request->stock'
+                WHERE `materials`.`id` = $id_material;";
         $consulta = DB::select($sql);
         return Response()->json([
             'message' => $consulta

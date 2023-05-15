@@ -71,9 +71,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     //Route::get("readpe",[PedidosController::class,"readpe"]);
     Route::put("updatepe/{id}", [PedidosController::class, "updatepe"]);
     Route::delete("deletepe/{id}", [PedidosController::class, "deletepe"]);
-    Route::get('indexo/{id}', [PedidosController::class, "indexo"]);
-    Route::put('updatestock/{id},{stock}', [PedidosController::class, "updatestock"]);
-
+    Route::put('updatestock/{id_material}', [PedidosController::class, "updatestock"]);
 
     //Route::get("readm",[MaterialController::class,"readm"]);
     Route::put("updatem/{id}", [MaterialController::class, "updatem"]);
