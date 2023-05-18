@@ -13,14 +13,43 @@ class PedidosController extends Controller
         $pedidos = pedidos::all();
         return $pedidos;
     }
+
     public function indexo($id)
     {
         $sql = "Select metodo_pago, id_punto_entrega, id_material, id_usuario, Total, estado
                 from pedidos
-                where id_usuario = '$id';";
+                where id_usuario = $id;";
         $CreateRanking = DB::select($sql);
         return $CreateRanking;
     }
+
+    public function indexnombreproducto($id)
+    {
+        $sql = "Select nombre
+                from materials
+                where id = $id;";
+        $CreateRanking = DB::select($sql);
+        return $CreateRanking;
+    }
+
+    public function indexnombretienda($id)
+    {
+        $sql = "Select tienda
+                from puntoentregas
+                where id = $id;";
+        $CreateRanking = DB::select($sql);
+        return $CreateRanking;
+    }
+
+    public function indexnombrecleinte($id)
+    {
+        $sql = "Select name, lastname
+                from users
+                where id = $id;";
+        $CreateRanking = DB::select($sql);
+        return $CreateRanking;
+    }
+
     public function createpe(Request $request)
     {
         $request->validate([
@@ -69,6 +98,17 @@ class PedidosController extends Controller
         $sql = "UPDATE `materials`
                 SET `cantidad` = '$request->stock'
                 WHERE `materials`.`id` = $id_material;";
+        $consulta = DB::select($sql);
+        return Response()->json([
+            'message' => $consulta
+        ]);
+    }
+
+    public function updateestado(Request $request)
+    {
+        $sql = "UPDATE `pedidos`
+                SET `estado` = '$request->estado'
+                WHERE `id` = $request->id;";
         $consulta = DB::select($sql);
         return Response()->json([
             'message' => $consulta

@@ -96,9 +96,14 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::delete("deletec/{id}", [CategoriaController::class, "deletec"]);
     Route::get('indexo/{id}', [PedidosController::class, "indexo"]);
     Route::get('index', [PedidosController::class, "index"]);
+    Route::get('indexnombreproducto/{id}', [PedidosController::class, "indexnombreproducto"]);
+    Route::get('indexnombretienda/{id}', [PedidosController::class, "indexnombretienda"]);
+    Route::get('indexnombrecleinte/{id}', [PedidosController::class, "indexnombrecleinte"]);
+    Route::put('updateestado', [PedidosController::class, "updateestado"]);
 
 
     Route::get('indexca', [CarritoController::class, "indexca"]);
+    Route::get('namematerial/{id}', [CarritoController::class, "namematerial"]);
     Route::post('createca', [CarritoController::class, "createca"]);
     //Route::get('readca',[CarritoController::class,"readca"]);
     Route::put('updateca/{id}', [CarritoController::class, "updateca"]);
